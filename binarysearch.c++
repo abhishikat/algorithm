@@ -44,13 +44,4 @@ int main(){
 	return 1;
 }
 
-/*OUTPUT:
-Enter the number of test cases:2
-Enter the no. of elements and the key to be searched:2 3
-Enter the elements:3 4
-Enter the no. of elements and the key to be searched:2 4
-Enter the elements:1 2 3 2
-OUTPUT:
-1
--1
-*/
+
