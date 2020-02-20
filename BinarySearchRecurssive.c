@@ -1,4 +1,8 @@
+
 #include<stdio.h>
+
+#include<math.h>
+#include <time.h>
 int binarySearch(int A[], int low, int high, int x)
 {
 	
@@ -17,6 +21,7 @@ int binarySearch(int A[], int low, int high, int x)
 int main(void)
 {
 	int arr[100],target,n;
+	scanf("%d",&n);
 	for(int i=0;i<n;i++)
 	{
 		scanf("%d",&arr[i]);
@@ -26,15 +31,26 @@ int main(void)
 	 n = sizeof(arr)/sizeof(arr[0]);
 
 	int low = 0, high = n - 1;
+ clock_t t; 
+    t = clock();
 	int index = binarySearch(arr, low, high, target);
 
-	if (index != -1)
-		printf("Element found at index %d", index);
+	if (index = -1)
+{
+		printf("Element found at index \n");
+}
 	else
-		printf("Element not found in the array\n ");
-		printf("not found\n");
+		{
+printf("Element not found in the array\n ");
+}
+
+t = clock() - t; 
+    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds 
+  
+    printf("selectionsort() took %f seconds to execute \n", time_taken); 
+		
+
 
 
 	return 0;
 }
-
