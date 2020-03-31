@@ -1,54 +1,78 @@
 
 /* Sort a given set of N integer elements using Quick Sort technique and compute its time taken */
 
-#include<stdio.h>
+#include<stdio.h> 
+  #include<time.h>
 
-int a[30];
-int partition(int l,int h)
-{
-	int pivot=a[l];
-	int i=l,j=h;
-	while(i<j)
-	{
-		do{
-			i++;
-		}while(a[i]<=pivot);
-		do{
-			j--;
-		}while(a[j]>pivot);
-		if(i<j)
-			swap(a[i],a[j]);
-	}
-	swap(a[l],a[j]);
-	return j;
-}
+void swap(int* a, int* b) 
+{ 
+    int t = *a; 
+    *a = *b; 
+    *b = t; 
+} 
 
-void quicksort(int l,int h)
-{
-	if(l<h)
-	{
-		int j=partition(l,h);
-		quicksort(l,j);
-		quicksort(j+1,h);
-	}
-}
+   of pivot */
+int partition (int arr[], int low, int high) 
+{ 
+    int pivot = arr[high];    
+    int i = (low - 1);  
+  
+    for (int j = low; j <= high- 1; j++) 
+    { 
 
-int main()
-{
-	int n;
-	printf("enter the size of the array");
-	cin>>n;
-  cout<<"Enter the elements:"<<endl;
-	for(int i=0;i<n;i++)
-		cin>>a[i];
-	a[n]=99999;
-	auto start=high_resolution_clock::now();
-	quicksort(0,n);
-	auto stop=high_resolution_clock::now();
-	auto duration = duration_cast<microseconds>(stop - start); 
-	cout<<"Sorted array is"<<endl;
-	for(int i=0;i<n;i++)
-		cout<<a[i]<<endl;
-	cout<<"Time taken : "<<duration.count()<<" microseconds"<<endl;
-	return 0;
+        if (arr[j] < pivot) 
+        { 
+            i++;    
+            swap(&arr[i], &arr[j]); 
+        } 
+    } 
+    swap(&arr[i + 1], &arr[high]); 
+    return (i + 1); 
+} 
+  
+
+void quickSort(int arr[], int low, int high) 
+{ 
+    if (low < high) 
+    { 
+    
+        int pi = partition(arr, low, high); 
+  
+  
+        quickSort(arr, low, pi - 1); 
+        quickSort(arr, pi + 1, high); 
+    } 
+} 
+
+void printArray(int arr[], int size) 
+{ 
+    int i; 
+    for (i=0; i < size; i++) 
+        printf("%d ", arr[i]); 
+    printf("\n"); 
+} 
+ 
+int main() 
+{ 
+    int arr[] = {10, 7, 23, 9, 5, 100}; 
+
+
+
+    int n = sizeof(arr)/sizeof(arr[0]);
+ clock_t t; 
+	t=clock(); 
+    quickSort(arr, 0, n-1); 
+t = clock() - t; 
+    printf("Sorted array:"); 
+    printArray(arr, n);
+double time_taken = ((double)t)/CLOCKS_PER_SEC; 
+	printf("\nmerge sort function took %f seconds to execute \n", time_taken);  
+
+    return 0; 
 }
+/*
+Sorted array:5 7 9 10 23 100 
+
+merge sort function took 0.000003 seconds to execute 
+*/
+//code by ABHISHIKAT
