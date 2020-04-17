@@ -1,4 +1,5 @@
 
+
 /* Check whether a given graph is connected or not using DFS method.*/
 
 #include<stdio.h>
@@ -41,7 +42,7 @@ void dfs(int v)
 
 int main()
 {
-	int v;
+	int v,n;
 	printf("enetr number of vertices");
 scanf("%d",&n);
 printf("enter the adjacency matrix");
