@@ -11,7 +11,7 @@ void swap(int* a, int* b)
     *b = t; 
 } 
 
-   of pivot */
+ 
 int partition (int arr[], int low, int high) 
 { 
     int pivot = arr[high];    
