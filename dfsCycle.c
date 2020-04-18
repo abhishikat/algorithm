@@ -1,54 +1,125 @@
 
-/*Using DFS, find if there are cycles in a given graph.*/
+#include<stdio.h>
+#include<stdlib.h>
 
-#include<iostream>
-#include<set>
-using namespace std;
-int arr[30][30];
-bool dfs(int vertex, set<int>&visited, int parent,int n) {
-   visited.insert(vertex);
-   for(int v = 0; v<n; v++) {
-      if(arr[vertex][v]) {
-         if(v == parent)    
-            continue;
-         if(visited.find(v) != visited.end())    
-            return true;
-         if(dfs(v, visited, vertex,n))
-            return true;
-      }
-   }
-   return false;
-}
 
-bool hasCycle(int n) {
-   set<int>visited;       //visited set
-   for(int v = 0; v<n; v++) {
-      if(visited.find(v) != visited.end())   
-         continue;
-      if(dfs(v, visited, -1,n)) {   
-         return true;
-      }
-   }
-   return false;
-}
+int A[20][20],visited[20],v=0,count=0,n;
+int seq[20],s=0,connected=1,acyclic=1;
 
-int main() {
-   bool res;
-  int n;
-   cout<<"enter the number of vertices\n";
-   cin>> n;
-   cout<<"enter the adjacency matrix\n";
-   for(int i=0;i<n;i++){
-   for(int j=0;j<n;j++){
-   cin>>arr[i][j];
-   }
-   }
-   res = hasCycle(n);
-   if(res)
-      cout << "The graph has cycle." << endl;
-   else
-      cout << "The graph has no cycle." << endl;
+
+void DFS();
+void DFSearch(int cur);
+int main() 
+{    
+    int i,j;
+
+    printf("\nEnter no of Vertices: ");
+    scanf("%d",&n);
+
+    printf("\nEnter the Adjacency Matrix(1/0):\n");
+    for(i=1;i<=n;i++)
+            for(j=1;j<=n;j++)
+        scanf("%d",&A[i][j]);
+
+    printf("\nThe Depth First Search Traversal:\n");
+
+    DFS();
+
+    for(i=1;i<=n;i++)
+        printf("%c\t",'a'+seq[i]-1);
+
+    if( acyclic) 
+    printf(" \nAcyclic Graph!");
+    if( !acyclic) 
+    printf("\n Cyclic Graph!");
+
     return 0;
    }
-   
 
+
+void DFS()
+{ 
+    int i;
+    for(i=1;i<=n;i++)
+        if(!visited[i])
+        {
+           if(i>1) connected=0;
+                DFSearch(i);    
+        } 
+}
+
+void DFSearch(int cur) 
+{
+    int i,j;
+    visited[cur]=++count;
+    seq[count]=cur; 
+    for(i=1;i<count-1;i++)
+            if(A[cur][seq[i]]) 
+                  acyclic=0;
+
+    for(i=1;i<=n;i++)
+        if(A[cur][i] && !visited[i])
+           DFSearch(i);
+}
+#include<stdio.h>
+#include<stdlib.h>
+
+
+int A[20][20],visited[20],v=0,count=0,n;
+int seq[20],s=0,connected=1,acyclic=1;
+
+
+void DFS();
+void DFSearch(int cur);
+int main() 
+{    
+    int i,j;
+
+    printf("\nEnter no of Vertices: ");
+    scanf("%d",&n);
+
+    printf("\nEnter the Adjacency Matrix(1/0):\n");
+    for(i=1;i<=n;i++)
+            for(j=1;j<=n;j++)
+        scanf("%d",&A[i][j]);
+
+    printf("\nThe Depth First Search Traversal:\n");
+
+    DFS();
+
+    for(i=1;i<=n;i++)
+        printf("%c\t",'a'+seq[i]-1);
+
+    if( acyclic) 
+    printf(" \nAcyclic Graph!");
+    if( !acyclic) 
+    printf("\n Cyclic Graph!");
+
+    return 0;
+   }
+
+
+void DFS()
+{ 
+    int i;
+    for(i=1;i<=n;i++)
+        if(!visited[i])
+        {
+           if(i>1) connected=0;
+                DFSearch(i);    
+        } 
+}
+
+void DFSearch(int cur) 
+{
+    int i,j;
+    visited[cur]=++count;
+    seq[count]=cur; 
+    for(i=1;i<count-1;i++)
+            if(A[cur][seq[i]]) 
+                  acyclic=0;
+
+    for(i=1;i<=n;i++)
+        if(A[cur][i] && !visited[i])
+           DFSearch(i);
+}
