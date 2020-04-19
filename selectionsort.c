@@ -1,58 +1,48 @@
-// Selection sort in C
 
-#include <stdio.h>
-#include<math.h>
-#include <time.h>
-void swap(int *a, int *b)
-{
-  int temp = *a;
-  *a = *b;
-  *b = temp;
-}
-void selectionSort(int array[], int size)
-{
-  for (int step = 0; step < size - 1; step++)
-  {
-    int min_idx = step;
-    for (int i = step + 1; i < size; i++)
-    {
-      if (array[i] < array[min_idx])
-        min_idx = i;
-    }
-    swap(&array[min_idx], &array[step]);
-  }
-}
-void printArray(int array[], int size)
-{
-  for (int i = 0; i < size; ++i)
-  {
-    printf("%d  ", array[i]);
-  }
-  printf("\n");
-}
-int main()
-{
-
-int p;
-scanf("%d",&p);
-int data[p];
-for(int i=0;i<p;i++)
-{
-scanf("%d",&data[i]);
-}
-  //int data[] = {20, 12, 10, 15, 2};
-  int size = (sizeof(data) / sizeof(data[0]));
-  clock_t t; 
-    t = clock();
-  selectionSort(data, size);
-
+// C program for implementation of selection sort 
+#include <stdio.h> 
+  
+void swap(int *xp, int *yp) 
+{ 
+    int temp = *xp; 
+    *xp = *yp; 
+    *yp = temp; 
+} 
+  
+void selectionSort(int arr[], int n) 
+{ 
+    int i, j, min_idx; 
+  
+    // One by one move boundary of unsorted subarray 
+    for (i = 0; i < n-1; i++) 
+    { 
+        // Find the minimum element in unsorted array 
+        min_idx = i; 
+        for (j = i+1; j < n; j++) 
+          if (arr[j] < arr[min_idx]) 
+            min_idx = j; 
+  
+        // Swap the found minimum element with the first element 
+        swap(&arr[min_idx], &arr[i]); 
+    } 
+} 
   
 
-printf("Sorted array in Acsending Order:\n");
-  printArray(data, size);
-
-t = clock() - t; 
-    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds 
+void printArray(int arr[], int size) 
+{ 
+    int i; 
+    for (i=0; i < size; i++) 
+        printf("%d ", arr[i]); 
+    printf("\n"); 
+} 
   
-    printf("selectionsort() took %f seconds to execute \n", time_taken); 
+ 
+int main() 
+{ 
+    int arr[] = {64, 25, 12, 22, 11}; 
+    int n = sizeof(arr)/sizeof(arr[0]); 
+    selectionSort(arr, n); 
+    printf("Sorted array: \n"); 
+    printArray(arr, n); 
+    return 0; 
 }
